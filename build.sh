@@ -38,11 +38,11 @@ file_list() {
 
 file_list | while read -r script; do
 	if [[ $script == "Dockerfile" ]]; then
-		check_docker $script
+		check_docker "$script"
 	elif [[ $script  == *.sh ]]; then
-		check_shell $script
+		check_shell "$script"
 	elif [[ $script == *.yml ]]; then
-		check_ansible $script
+		check_ansible "$script"
 	else
 		info "Skipping $script..."
 	fi
