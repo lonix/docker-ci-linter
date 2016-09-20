@@ -14,7 +14,7 @@ info() {
   printf "\r  [ \033[00;34m??\033[0m ] %s\n" "$1"
 }
 
-check_shell() {
+check_bash() {
   local script="$1"
   shellcheck "$script" || fail "$script"
   success "$script"
@@ -37,10 +37,10 @@ file_list() {
 }
 
 file_list | while read -r script; do
-	if [[ $script == "Dockerfile" ]]; then
+	if [[ $script == "*Dockerfile" ]]; then
 		check_docker "$script"
 	elif [[ $script  == *.sh ]]; then
-		check_shell "$script"
+		check_bash "$script"
 	elif [[ $script == *.yml ]]; then
 		check_ansible "$script"
 	else

@@ -7,4 +7,4 @@ source ./build.sh
 
 # Lint the build script
 echo "Linting the build.sh script..."
-check ./build.sh
+check_bash ./build.sh
