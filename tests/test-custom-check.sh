@@ -3,7 +3,7 @@
 set -eo pipefail
 
 # shellcheck disable=SC1091
-source ./build.sh
+source ./run_lint.sh
 
 # Lint the build script
 echo "Linting the run_lint.sh script..."
