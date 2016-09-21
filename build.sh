@@ -32,18 +32,26 @@ check_ansible() {
   success "$script"
 }
 
+check_markdown() {
+  local script="$1"
+  markdownlint "$script" || fail "$script"
+  success "$script"
+}
+
 file_list() {
-	 git ls-tree -r HEAD | awk '{print $4}'
+     git ls-tree -r HEAD | awk '{print $4}'
 }
 
 file_list | while read -r script; do
-	if [[ $script == "*Dockerfile" ]]; then
-		check_docker "$script"
-	elif [[ $script  == *.sh ]]; then
-		check_bash "$script"
-	elif [[ $script == *.yml ]]; then
-		check_ansible "$script"
-	else
-		info "Skipping $script..."
-	fi
+    if [[ $script == "*Dockerfile" ]]; then
+        check_docker "$script"
+  elif [[ $script == *.md ]]; then
+    check_markdown "$script"
+    elif [[ $script  == *.sh ]]; then
+        check_bash "$script"
+    elif [[ $script == *.yml ]]; then
+        check_ansible "$script"
+    else
+        info "Skipping $script..."
+    fi
 done
