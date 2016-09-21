@@ -8,7 +8,6 @@ success() {
 
 fail() {
   printf "\r  [\033[0;31mFAIL\033[0m] Linting %s...\n" "$1"
-  ((failure_count++))
 }
 
 info() {
@@ -17,26 +16,46 @@ info() {
 
 check_bash() {
   local script="$1"
-  shellcheck "$script" || fail "$script"
-  success "$script"
+
+  if ! shellcheck "$script"; then
+    failure "$script"
+    (( failure_count++ ))
+  else
+    success "$script"
+  fi
 }
 
 check_docker() {
   local script="$1"
-  hadolint "$script" || fail "$script"
-  success "$script"
+
+  if ! hadolint "$script"; then
+    failure "$script"
+    (( failure_count++ ))
+  else
+    success "$script"
+  fi
 }
 
 check_ansible() {
   local script="$1"
-  ansible-lint "$script" || fail "$script"
-  success "$script"
+
+  if ! ansible-lint "$script"; then
+    failure "$script"
+    (( failure_count++ ))
+  else
+    success "$script"
+  fi
 }
 
 check_markdown() {
   local script="$1"
-  markdownlint "$script" || fail "$script"
-  success "$script"
+
+  if ! markdownlint "$script"; then
+    failure "$script"
+    (( failure_count++ ))
+  else
+    success "$script"
+  fi
 }
 
 file_list() {
@@ -44,7 +63,7 @@ file_list() {
 }
 
 file_list | while read -r script; do
-    if [[ $script == "*Dockerfile" ]]; then
+    if [[ $script == *Dockerfile ]]; then
         check_docker "$script"
   elif [[ $script == *.md ]]; then
     check_markdown "$script"
@@ -60,7 +79,7 @@ done
 if [[ $failure_count -eq 0 ]]; then
   info "All tests ok"
   exit 0
+else
+  error "$failure_count failed linting"
+  exit 1
 fi
-
-error "$failure_count failed linting"
-exit 1
