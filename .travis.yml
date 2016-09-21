@@ -4,7 +4,6 @@ install:
   - ./install_lint.sh
 script:
   - ./run_lint.sh
-  - ./tests/test-custom-check.sh
 notifications:
   email: false
 sudo: required
