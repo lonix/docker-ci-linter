@@ -8,5 +8,4 @@ script:
 notifications:
   email: false
 sudo: required
-os:
-  - linux
+dist: xenial
