@@ -66,7 +66,7 @@ if [ $SHLVL -gt 1 ]; then
   file_list | while read -r script; do
       if [[ $script == *Dockerfile ]]; then
           check_docker "$script"
-    elif [[ $script == *.md ]]; then
+    elif [[ $script == *.MD ]]; then
       check_markdown "$script"
       elif [[ $script  == *.sh ]]; then
           check_bash "$script"
