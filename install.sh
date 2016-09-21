@@ -12,4 +12,4 @@ sudo curl -Lso \
 sudo chmod +x /usr/bin/shellcheck /usr/bin/hadolint
 sudo pip install ansible-lint
 
-
+sudo npm install markdownlint --save-dev
