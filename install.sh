@@ -12,4 +12,4 @@ sudo chmod +x /usr/bin/shellcheck /usr/bin/hadolint
 
 sudo pip install ansible-lint
 sudo apt-get install -y npm
-npm install markdownlint
+sudo npm install markdownlint
