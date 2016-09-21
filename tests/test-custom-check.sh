@@ -6,5 +6,5 @@ set -eo pipefail
 source ./build.sh
 
 # Lint the build script
-echo "Linting the build.sh script..."
-check_bash ./build.sh
+echo "Linting the run_lint.sh script..."
+check_bash ./run_lint.sh
