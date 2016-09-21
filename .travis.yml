@@ -1,11 +1,5 @@
 language: python
 python: 2.7
-
-addons:
-  apt:
-    packages:
-     - npm
-     - node
 install:
   - ./install.sh
 script:
