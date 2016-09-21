@@ -6,6 +6,6 @@ script:
   - ./build.sh
   - ./tests/test-custom-check.sh
 notifications:
-  email: false
+  email: falsex
 sudo: required
 dist: xenial
