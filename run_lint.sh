@@ -1,5 +1,6 @@
 #!/bin/bash
 
+failure_count=0
 
 success() {
   printf "\r  [ \033[00;32mOK\033[0m ] Linting %s...\n" "$1"
@@ -7,7 +8,7 @@ success() {
 
 fail() {
   printf "\r  [\033[0;31mFAIL\033[0m] Linting %s...\n" "$1"
-  exit 1
+  ((failure_count++))
 }
 
 info() {
@@ -55,3 +56,11 @@ file_list | while read -r script; do
         info "Skipping $script..."
     fi
 done
+
+if [[ $failure_count -eq 0 ]]; then
+  info "All tests ok"
+  exit 0
+fi
+
+error "$failure_count failed linting"
+exit 1
