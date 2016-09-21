@@ -8,8 +8,8 @@ sudo curl -Lso \
   /usr/bin/hadolint \
   https://github.com/lukasmartinelli/hadolint/releases/download/v1.2.1/hadolint_linux_amd64
 
-
 sudo chmod +x /usr/bin/shellcheck /usr/bin/hadolint
+
 sudo pip install ansible-lint
 
 sudo npm install markdownlint --save-dev
