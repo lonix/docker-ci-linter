@@ -18,7 +18,7 @@ check_bash() {
   local script="$1"
 
   if ! shellcheck "$script"; then
-    failure "$script"
+    fail "$script"
     (( failure_count++ ))
   else
     success "$script"
@@ -29,7 +29,7 @@ check_docker() {
   local script="$1"
 
   if ! hadolint "$script"; then
-    failure "$script"
+    fail "$script"
     (( failure_count++ ))
   else
     success "$script"
@@ -40,7 +40,7 @@ check_ansible() {
   local script="$1"
 
   if ! ansible-lint "$script"; then
-    failure "$script"
+    fail "$script"
     (( failure_count++ ))
   else
     success "$script"
@@ -51,7 +51,7 @@ check_markdown() {
   local script="$1"
 
   if ! markdownlint "$script"; then
-    failure "$script"
+    fail "$script"
     (( failure_count++ ))
   else
     success "$script"
