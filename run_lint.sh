@@ -62,12 +62,11 @@ file_list() {
      git ls-tree -r HEAD | awk '{print $4}'
 }
 
-if [ $SHLVL -gt 1 ]; then
   file_list | while read -r script; do
       if [[ $script == *Dockerfile ]]; then
           check_docker "$script"
-    elif [[ $script == *.MD ]]; then
-      check_markdown "$script"
+      elif [[ $script == *.MD || $script == *.md ]]; then
+          check_markdown "$script"
       elif [[ $script  == *.sh ]]; then
           check_bash "$script"
       elif [[ $script == *.yml ]]; then
@@ -84,4 +83,4 @@ if [ $SHLVL -gt 1 ]; then
     error "$failure_count failed linting"
     exit 1
   fi
-fi
+  
