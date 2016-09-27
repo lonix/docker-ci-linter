@@ -1,12 +1,10 @@
 language: python
 python: 2.7
 install:
-  - ./install.sh
+  - ./install_lint.sh
 script:
-  - ./build.sh
-  - ./tests/test-custom-check.sh
+  - ./run_lint.sh
 notifications:
   email: false
 sudo: required
-os:
-  - linux
+dist: xenial
