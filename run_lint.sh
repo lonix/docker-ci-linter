@@ -1,6 +1,5 @@
 #!/bin/bash
-
-failure_count=0
+unset FAIL
 
 success() {
   printf "\r  [ \033[00;32mOK\033[0m ] Linting %s...\n" "$1"
@@ -19,7 +18,7 @@ check_bash() {
 
   if ! shellcheck "$script"; then
     fail "$script"
-    (( failure_count++ ))
+    export FAIL=true
   else
     success "$script"
   fi
@@ -30,7 +29,7 @@ check_docker() {
 
   if ! hadolint "$script"; then
     fail "$script"
-    (( failure_count++ ))
+    export FAIL=true
   else
     success "$script"
   fi
@@ -41,7 +40,7 @@ check_ansible() {
 
   if ! ansible-lint "$script"; then
     fail "$script"
-    (( failure_count++ ))
+    export FAIL=true
   else
     success "$script"
   fi
@@ -52,7 +51,7 @@ check_markdown() {
 
   if ! markdownlint "$script"; then
     fail "$script"
-    (( failure_count++ ))
+    export FAIL=true
   else
     success "$script"
   fi
@@ -76,11 +75,10 @@ file_list() {
       fi
   done
 
-  if [[ $failure_count -eq 0 ]]; then
-    info "All tests ok"
-    exit 0
-  else
-    error "$failure_count failed linting"
+  if [ $FAIL == true ] ; then
+    error "Linting failed"
     exit 1
+  else
+    info "All Linting tests OK"
+    exit 0
   fi
-  
